@@ -39,6 +39,7 @@ public class BraintreeConfiguration {
     private static final String MERCHANT_ID = "merchant_id";
     private static final String PUBLIC_KEY  = "public_key";
     private static final String PRIVATE_KEY = "private_key";
+    private static final String ACCESS_TOKEN = "access_token";
 
     @UriPath
     @Metadata(required = "true")
@@ -47,20 +48,19 @@ public class BraintreeConfiguration {
     private String methodName;
 
     @UriParam
-    @Metadata(required = "true")
     private String environment;
 
     @UriParam
-    @Metadata(required = "true")
     private String merchantId;
 
     @UriParam
-    @Metadata(required = "true")
     private String publicKey;
 
     @UriParam
-    @Metadata(required = "true")
     private String privateKey;
+
+    @UriParam
+    private String accessToken;
 
     @UriParam
     @Metadata(label = "proxy")
@@ -104,7 +104,8 @@ public class BraintreeConfiguration {
     }
 
     public String getEnvironment() {
-        return ObjectHelper.notNull(environment, ENVIRONMENT);
+        return environment;
+//        return ObjectHelper.notNull(environment, ENVIRONMENT);
     }
 
     /**
@@ -115,7 +116,8 @@ public class BraintreeConfiguration {
     }
 
     public String getMerchantId() {
-        return ObjectHelper.notNull(merchantId, MERCHANT_ID);
+        return merchantId;
+//        return ObjectHelper.notNull(merchantId, MERCHANT_ID);
     }
 
     /**
@@ -126,7 +128,8 @@ public class BraintreeConfiguration {
     }
 
     public String getPublicKey() {
-        return ObjectHelper.notNull(publicKey, PUBLIC_KEY);
+        return publicKey;
+//        return ObjectHelper.notNull(publicKey, PUBLIC_KEY);
     }
 
     /**
@@ -137,7 +140,8 @@ public class BraintreeConfiguration {
     }
 
     public String getPrivateKey() {
-        return ObjectHelper.notNull(privateKey, PRIVATE_KEY);
+        return privateKey;
+//        return ObjectHelper.notNull(privateKey, PRIVATE_KEY);
     }
 
     /**
@@ -145,6 +149,17 @@ public class BraintreeConfiguration {
      */
     public void setPrivateKey(String privateKey) {
         this.privateKey = privateKey;
+    }
+
+    public String getAccessToken() {
+        return accessToken;
+    }
+
+    /**
+     * The access token granted to a merchant.
+     */
+    public void setAccessToken(String accessToken) {
+        this.accessToken = accessToken;
     }
 
     public String getProxyHost() {
@@ -224,19 +239,31 @@ public class BraintreeConfiguration {
             return Environment.PRODUCTION;
         }
 
-        throw new IllegalArgumentException(String.format(
-            "Environment should be development, sandbox or production, got %s", name));
+        // TODO - parse from access token if present
+        return Environment.SANDBOX;
+        //throw new IllegalArgumentException(String.format(
+        //    "Environment should be development, sandbox or production, got %s", name));
     }
 
     /**
      * Construct a BraintreeGateway from configuration
      */
     synchronized BraintreeGateway newBraintreeGateway() {
-        final BraintreeGateway gateway = new BraintreeGateway(
-            getBraintreeEnvironment(),
-            getMerchantId(),
-            getPublicKey(),
-            getPrivateKey());
+        final BraintreeGateway gateway;
+
+        if (accessToken != null) {
+            gateway = new BraintreeGateway(
+                    accessToken
+            );
+            //setEnvironment(gateway.getConfiguration().getEnvironment().getEnvironmentName());
+        } else {
+            gateway = new BraintreeGateway(
+                    getBraintreeEnvironment(),
+                    getMerchantId(),
+                    getPublicKey(),
+                    getPrivateKey()
+            );
+        }
 
         if (ObjectHelper.isNotEmpty(proxyHost) && ObjectHelper.isNotEmpty(proxyPort)) {
             gateway.setProxy(proxyHost, proxyPort);

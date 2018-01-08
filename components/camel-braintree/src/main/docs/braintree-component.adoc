@@ -69,16 +69,17 @@ with the following path and query parameters:
 | *methodName* | What sub operation to use for the selected operation |  | String
 |===
 
-==== Query Parameters (13 parameters):
+==== Query Parameters (14 parameters):
 
 [width="100%",cols="2,5,^1,2",options="header"]
 |===
 | Name | Description | Default | Type
-| *environment* (common) | *Required* The environment Either SANDBOX or PRODUCTION |  | String
+| *accessToken* (common) | The access token granted to a merchant. |  | String
+| *environment* (common) | The environment Either SANDBOX or PRODUCTION |  | String
 | *inBody* (common) | Sets the name of a parameter to be passed in the exchange In Body |  | String
-| *merchantId* (common) | *Required* The merchant id provided by Braintree. |  | String
-| *privateKey* (common) | *Required* The private key provided by Braintree. |  | String
-| *publicKey* (common) | *Required* The public key provided by Braintree. |  | String
+| *merchantId* (common) | The merchant id provided by Braintree. |  | String
+| *privateKey* (common) | The private key provided by Braintree. |  | String
+| *publicKey* (common) | The public key provided by Braintree. |  | String
 | *bridgeErrorHandler* (consumer) | Allows for bridging the consumer to the Camel routing Error Handler which mean any exceptions occurred while the consumer is trying to pickup incoming messages or the likes will now be processed as a message and handled by the routing Error Handler. By default the consumer will use the org.apache.camel.spi.ExceptionHandler to deal with exceptions that will be logged at WARN or ERROR level and ignored. | false | boolean
 | *exceptionHandler* (consumer) | To let the consumer use a custom ExceptionHandler. Notice if the option bridgeErrorHandler is enabled then this options is not in use. By default the consumer will deal with exceptions that will be logged at WARN or ERROR level and ignored. |  | ExceptionHandler
 | *exchangePattern* (consumer) | Sets the exchange pattern when the consumer creates an exchange. |  | ExchangePattern

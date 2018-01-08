@@ -117,7 +117,6 @@ public class BraintreeConfiguration {
 
     public String getMerchantId() {
         return merchantId;
-//        return ObjectHelper.notNull(merchantId, MERCHANT_ID);
     }
 
     /**
@@ -129,7 +128,6 @@ public class BraintreeConfiguration {
 
     public String getPublicKey() {
         return publicKey;
-//        return ObjectHelper.notNull(publicKey, PUBLIC_KEY);
     }
 
     /**
@@ -141,7 +139,6 @@ public class BraintreeConfiguration {
 
     public String getPrivateKey() {
         return privateKey;
-//        return ObjectHelper.notNull(privateKey, PRIVATE_KEY);
     }
 
     /**
@@ -239,10 +236,8 @@ public class BraintreeConfiguration {
             return Environment.PRODUCTION;
         }
 
-        // TODO - parse from access token if present
-        return Environment.SANDBOX;
-        //throw new IllegalArgumentException(String.format(
-        //    "Environment should be development, sandbox or production, got %s", name));
+        throw new IllegalArgumentException(String.format(
+            "Environment should be development, sandbox or production, got %s", name));
     }
 
     /**
@@ -255,7 +250,7 @@ public class BraintreeConfiguration {
             gateway = new BraintreeGateway(
                     accessToken
             );
-            //setEnvironment(gateway.getConfiguration().getEnvironment().getEnvironmentName());
+            setEnvironment(gateway.getConfiguration().getEnvironment().getEnvironmentName());
         } else {
             gateway = new BraintreeGateway(
                     getBraintreeEnvironment(),

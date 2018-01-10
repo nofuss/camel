@@ -33,6 +33,10 @@ import org.junit.Test;
 public class MerchantAccountGatewayIntegrationTest extends AbstractBraintreeTestSupport {
     private static final String PATH_PREFIX = BraintreeApiCollection.getCollection().getApiName(MerchantAccountGatewayApiMethod.class).getName();
 
+    public MerchantAccountGatewayIntegrationTest() {
+        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
+    }
+
     @Ignore
     @Test
     public void testCreate() throws Exception {

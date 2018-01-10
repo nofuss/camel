@@ -25,6 +25,10 @@ import org.junit.Test;
 public class ClientTokenGatewayIntegrationTest extends AbstractBraintreeTestSupport {
     private static final String PATH_PREFIX = getApiNameAsString(ClientTokenGatewayApiMethod.class);
 
+    public ClientTokenGatewayIntegrationTest() {
+        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
+    }
+
     @Test
     public void testClientTokenGeneration() throws Exception {
         final String token = requestBody("direct://GENERATE", null, String.class);

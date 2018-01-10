@@ -41,6 +41,10 @@ public class CustomerGatewayIntegrationTest extends AbstractBraintreeTestSupport
     private static final String PATH_PREFIX = getApiNameAsString(CustomerGatewayApiMethod.class);
     private static final Logger LOG = LoggerFactory.getLogger(CustomerGatewayIntegrationTest.class);
 
+    public CustomerGatewayIntegrationTest() {
+        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
+    }
+
     /**
      * Customers management workflow:
      * - create a customer

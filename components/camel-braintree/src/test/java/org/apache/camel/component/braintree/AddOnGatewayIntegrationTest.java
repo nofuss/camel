@@ -31,6 +31,10 @@ public class AddOnGatewayIntegrationTest extends AbstractBraintreeTestSupport {
     private static final Logger LOG = LoggerFactory.getLogger(AddOnGatewayIntegrationTest.class);
     private static final String PATH_PREFIX = getApiNameAsString(AddOnGatewayApiMethod.class);
 
+    public AddOnGatewayIntegrationTest() {
+        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
+    }
+
     @Ignore
     @Test
     public void testAll() throws Exception {

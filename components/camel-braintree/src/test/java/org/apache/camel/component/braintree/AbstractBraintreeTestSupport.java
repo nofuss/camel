@@ -43,7 +43,10 @@ public class AbstractBraintreeTestSupport extends CamelTestSupport {
 
     private BraintreeGateway gateway;
 
-    protected AbstractBraintreeTestSupport() {
+    private BraintreeConfigurationBuilder configurationBuilder;
+
+    protected AbstractBraintreeTestSupport(BraintreeConfigurationBuilder configurationBuilder) {
+        this.configurationBuilder = configurationBuilder;
         this.gateway = null;
     }
 
@@ -51,45 +54,11 @@ public class AbstractBraintreeTestSupport extends CamelTestSupport {
     protected CamelContext createCamelContext() throws Exception {
 
         final CamelContext context = super.createCamelContext();
-
-        // read Braintree component configuration from TEST_OPTIONS_PROPERTIES
-        final Properties properties = new Properties();
-        try {
-            properties.load(getClass().getResourceAsStream(TEST_OPTIONS_PROPERTIES));
-        } catch (Exception e) {
-            throw new IOException(String.format("%s could not be loaded: %s", TEST_OPTIONS_PROPERTIES, e.getMessage()), e);
-        }
-
-        Map<String, Object> options = new HashMap<>();
-        for (Map.Entry<Object, Object> entry : properties.entrySet()) {
-            options.put(entry.getKey().toString(), entry.getValue());
-        }
-
-        addOptionIfMissing(options, "environment", "CAMEL_BRAINTREE_ENVIRONMENT");
-        addOptionIfMissing(options, "merchantId", "CAMEL_BRAINTREE_MERCHANT_ID");
-        addOptionIfMissing(options, "publicKey", "CAMEL_BRAINTREE_PUBLIC_KEY");
-        addOptionIfMissing(options, "privateKey", "CAMEL_BRAINTREE_PRIVATE_KEY");
-
-        final BraintreeConfiguration configuration = new BraintreeConfiguration();
-        configuration.setHttpLogLevel(BraintreeLogHandler.DEFAULT_LOGGER_VERSION);
-        configuration.setHttpLogName(BraintreeLogHandler.DEFAULT_LOGGER_NAME);
-        IntrospectionSupport.setProperties(configuration, options);
-
-        // add BraintreeComponent to Camel context
         final BraintreeComponent component = new BraintreeComponent(context);
-        component.setConfiguration(configuration);
+        component.setConfiguration(configurationBuilder.build());
         context.addComponent("braintree", component);
 
         return context;
-    }
-
-    protected void addOptionIfMissing(Map<String, Object> options, String name, String envName) {
-        if (!options.containsKey(name)) {
-            String value = System.getenv(envName);
-            if (ObjectHelper.isNotEmpty(value)) {
-                options.put(name, value);
-            }
-        }
     }
 
     @Override

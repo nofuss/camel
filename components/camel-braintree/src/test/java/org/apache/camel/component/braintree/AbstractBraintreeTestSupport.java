@@ -44,11 +44,13 @@ public class AbstractBraintreeTestSupport extends CamelTestSupport {
 
     private static final String TEST_OPTIONS_PROPERTIES = "/test-options.properties";
 
-    public enum ConfigurationType {
-        PUBLIC_PRIVATE_KEY,
+    public enum ConfigurationProfile {
+        PUBLIC_PRIVATE_KEYS,
         ACCESS_TOKEN,
         CLIENT_SECRET
     }
+
+    private ConfigurationProfile configurationType;
 
     private BraintreeGateway gateway;
 
@@ -92,10 +94,10 @@ public class AbstractBraintreeTestSupport extends CamelTestSupport {
             options.put(entry.getKey().toString(), entry.getValue());
         }
 
-        ConfigurationType configurationType = getConfigurationType();
+        ConfigurationProfile configurationType = getConfigurationProfile();
         LOG.info(String.format("Test using %s configuration type", configurationType));
         switch (configurationType) {
-            case PUBLIC_PRIVATE_KEY:
+            case PUBLIC_PRIVATE_KEYS:
                 addOptionIfMissing(options, "environment", "CAMEL_BRAINTREE_ENVIRONMENT");
                 addOptionIfMissing(options, "merchantId", "CAMEL_BRAINTREE_MERCHANT_ID");
                 addOptionIfMissing(options, "publicKey", "CAMEL_BRAINTREE_PUBLIC_KEY");
@@ -132,16 +134,22 @@ public class AbstractBraintreeTestSupport extends CamelTestSupport {
         return configuration;
     }
 
-    private ConfigurationType getConfigurationType() {
-        // TODO - consider making this an environment variable rather than a property
-        String configurationTypeString = System.getProperty("CAMEL_BRAINTREE_CONFIGURATION_TYPE");
+    public ConfigurationProfile getConfigurationProfile() {
+        if (configurationType == null) {
+            configurationType = parseConfigurationProfile();
+        }
+        return configurationType;
+    }
+
+    private ConfigurationProfile parseConfigurationProfile() {
+        String configurationTypeString = System.getProperty("braintreeGatewayConfigurationType");
         if (configurationTypeString != null) {
-            ConfigurationType configurationType = ConfigurationType.valueOf(configurationTypeString);
+            ConfigurationProfile configurationType = ConfigurationProfile.valueOf(configurationTypeString);
             if (configurationType != null) {
                 return configurationType;
             }
         }
-        return ConfigurationType.PUBLIC_PRIVATE_KEY;
+        return ConfigurationProfile.PUBLIC_PRIVATE_KEYS;
     }
 
     @Override

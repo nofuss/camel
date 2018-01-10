@@ -25,6 +25,7 @@ import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.braintree.internal.BraintreeApiCollection;
 import org.apache.camel.component.braintree.internal.BraintreeConstants;
 import org.apache.camel.component.braintree.internal.WebhookNotificationGatewayApiMethod;
+import org.junit.Assume;
 import org.junit.Test;
 
 public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintreeTestSupport {
@@ -32,6 +33,8 @@ public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintree
 
     @Test
     public void testParse() throws Exception {
+        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
+
         final BraintreeGateway gateway = getGateway();
 
         Map<String, String> notification = gateway.webhookTesting().sampleNotification(

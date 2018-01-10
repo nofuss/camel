@@ -50,7 +50,7 @@ public class AbstractBraintreeTestSupport extends CamelTestSupport {
         CLIENT_SECRET
     }
 
-    private ConfigurationProfile configurationType;
+    private ConfigurationProfile configurationProfile;
 
     private BraintreeGateway gateway;
 
@@ -134,11 +134,20 @@ public class AbstractBraintreeTestSupport extends CamelTestSupport {
         return configuration;
     }
 
-    public ConfigurationProfile getConfigurationProfile() {
-        if (configurationType == null) {
-            configurationType = parseConfigurationProfile();
+    protected ConfigurationProfile getConfigurationProfile() {
+        if (configurationProfile == null) {
+            configurationProfile = parseConfigurationProfile();
         }
-        return configurationType;
+        return configurationProfile;
+    }
+
+    protected boolean checkConfigurationProfile(ConfigurationProfile... configurationProfiles) {
+        for (ConfigurationProfile configurationProfile : configurationProfiles) {
+            if (getConfigurationProfile().equals(configurationProfile)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private ConfigurationProfile parseConfigurationProfile() {

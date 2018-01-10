@@ -105,7 +105,6 @@ public class BraintreeConfiguration {
 
     public String getEnvironment() {
         return environment;
-//        return ObjectHelper.notNull(environment, ENVIRONMENT);
     }
 
     /**

@@ -20,6 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import com.braintreegateway.BraintreeGateway;
+import com.braintreegateway.ConnectedMerchantPayPalStatusChanged;
+import com.braintreegateway.ConnectedMerchantStatusTransitioned;
 import com.braintreegateway.WebhookNotification;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.braintree.internal.BraintreeApiCollection;
@@ -32,24 +34,72 @@ public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintree
     private static final String PATH_PREFIX = BraintreeApiCollection.getCollection().getApiName(WebhookNotificationGatewayApiMethod.class).getName();
 
     @Test
-    public void testParse() throws Exception {
+    public void testParseSubscription() throws Exception {
         Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
+        runParseSubscriptionTest(WebhookNotification.Kind.SUBSCRIPTION_CANCELED);
+        runParseSubscriptionTest(WebhookNotification.Kind.SUBSCRIPTION_CHARGED_SUCCESSFULLY);
+        runParseSubscriptionTest(WebhookNotification.Kind.SUBSCRIPTION_CHARGED_UNSUCCESSFULLY);
+        runParseSubscriptionTest(WebhookNotification.Kind.SUBSCRIPTION_TRIAL_ENDED);
+        runParseSubscriptionTest(WebhookNotification.Kind.SUBSCRIPTION_WENT_ACTIVE);
+        runParseSubscriptionTest(WebhookNotification.Kind.SUBSCRIPTION_WENT_PAST_DUE);
+    }
 
+    private void runParseSubscriptionTest(WebhookNotification.Kind kind) {
+        final BraintreeGateway gateway = getGateway();
+
+        Map<String, String> notification = gateway.webhookTesting().sampleNotification(kind, "my_id");
+
+        final WebhookNotification result = sendSampleNotification(notification);
+
+        assertNotNull("parse result", result);
+        assertEquals(kind, result.getKind());
+        assertEquals("my_id", result.getSubscription().getId());
+    }
+
+    @Test
+    public void testParseConnectedMerchantStatusTransitioned() throws Exception {
         final BraintreeGateway gateway = getGateway();
 
         Map<String, String> notification = gateway.webhookTesting().sampleNotification(
-            WebhookNotification.Kind.SUBSCRIPTION_WENT_PAST_DUE,
-            "my_id"
+                WebhookNotification.Kind.CONNECTED_MERCHANT_STATUS_TRANSITIONED,
+                "my_merchant_public_id"
         );
 
+        final WebhookNotification result = sendSampleNotification(notification);
+
+        assertNotNull("parse result", result);
+        assertEquals(WebhookNotification.Kind.CONNECTED_MERCHANT_STATUS_TRANSITIONED, result.getKind());
+        ConnectedMerchantStatusTransitioned connectedMerchantStatusTransitioned = result.getConnectedMerchantStatusTransitioned();
+        assertEquals("my_merchant_public_id", connectedMerchantStatusTransitioned.getMerchantPublicId());
+        assertEquals("oauth_application_client_id", connectedMerchantStatusTransitioned.getOAuthApplicationClientId());
+        assertEquals("new_status", connectedMerchantStatusTransitioned.getStatus());
+    }
+
+    @Test
+    public void testParseConnectedMerchantPayPalStatusChanged() throws Exception {
+        final BraintreeGateway gateway = getGateway();
+
+        Map<String, String> notification = gateway.webhookTesting().sampleNotification(
+                WebhookNotification.Kind.CONNECTED_MERCHANT_PAYPAL_STATUS_CHANGED,
+                "my_merchant_public_id"
+        );
+
+        final WebhookNotification result = sendSampleNotification(notification);
+
+        assertNotNull("parse result", result);
+        assertEquals(WebhookNotification.Kind.CONNECTED_MERCHANT_PAYPAL_STATUS_CHANGED, result.getKind());
+
+        ConnectedMerchantPayPalStatusChanged connectedMerchantPayPalStatusChanged = result.getConnectedMerchantPayPalStatusChanged();
+        assertEquals("my_merchant_public_id", connectedMerchantPayPalStatusChanged.getMerchantPublicId());
+        assertEquals("oauth_application_client_id", connectedMerchantPayPalStatusChanged.getOAuthApplicationClientId());
+        assertEquals("link", connectedMerchantPayPalStatusChanged.getAction());
+    }
+
+    private WebhookNotification sendSampleNotification(Map<String, String> notification) {
         final Map<String, Object> headers = new HashMap<>();
         headers.put(BraintreeConstants.PROPERTY_PREFIX + "signature", notification.get("bt_signature"));
         headers.put(BraintreeConstants.PROPERTY_PREFIX + "payload", notification.get("bt_payload"));
-
-        final WebhookNotification result = requestBodyAndHeaders("direct://PARSE", null, headers);
-
-        assertNotNull("parse result", result);
-        assertEquals("my_id", result.getSubscription().getId());
+        return requestBodyAndHeaders("direct://PARSE", null, headers);
     }
 
     @Override

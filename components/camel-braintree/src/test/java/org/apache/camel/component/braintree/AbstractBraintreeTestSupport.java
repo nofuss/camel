@@ -46,8 +46,7 @@ public class AbstractBraintreeTestSupport extends CamelTestSupport {
 
     public enum ConfigurationProfile {
         PUBLIC_PRIVATE_KEYS,
-        ACCESS_TOKEN,
-        CLIENT_SECRET
+        ACCESS_TOKEN
     }
 
     private ConfigurationProfile configurationProfile;
@@ -104,21 +103,9 @@ public class AbstractBraintreeTestSupport extends CamelTestSupport {
                 addOptionIfMissing(options, "privateKey", "CAMEL_BRAINTREE_PRIVATE_KEY");
                 options.remove("accessToken");
                 options.remove("clientId");
-                options.remove("clientSecret");
                 break;
             case ACCESS_TOKEN:
                 addOptionIfMissing(options, "accessToken", "CAMEL_BRAINTREE_ACCESS_TOKEN");
-                options.remove("environment");
-                options.remove("merchantId");
-                options.remove("publicKey");
-                options.remove("privateKey");
-                options.remove("clientId");
-                options.remove("clientSecret");
-                break;
-            case CLIENT_SECRET:
-                addOptionIfMissing(options, "clientId", "CAMEL_BRAINTREE_CLIENT_ID");
-                addOptionIfMissing(options, "clientSecret", "CAMEL_BRAINTREE_CLIENT_SECRET");
-                options.remove("accessToken");
                 options.remove("environment");
                 options.remove("merchantId");
                 options.remove("publicKey");

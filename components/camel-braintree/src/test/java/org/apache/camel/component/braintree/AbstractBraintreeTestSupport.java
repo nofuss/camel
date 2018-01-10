@@ -94,7 +94,7 @@ public class AbstractBraintreeTestSupport extends CamelTestSupport {
         }
 
         ConfigurationProfile configurationType = getConfigurationProfile();
-        LOG.info(String.format("Test using %s configuration type", configurationType));
+        LOG.info(String.format("Test using %s configuration profile", configurationType));
         switch (configurationType) {
             case PUBLIC_PRIVATE_KEYS:
                 addOptionIfMissing(options, "environment", "CAMEL_BRAINTREE_ENVIRONMENT");

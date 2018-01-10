@@ -32,10 +32,6 @@ public class SubscriptionGatewayIntegrationTest extends AbstractBraintreeTestSup
     private static final Logger LOG = LoggerFactory.getLogger(SubscriptionGatewayIntegrationTest.class);
     private static final String PATH_PREFIX = BraintreeApiCollection.getCollection().getApiName(SubscriptionGatewayApiMethod.class).getName();
 
-    public SubscriptionGatewayIntegrationTest() {
-        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
-    }
-
     // TODO provide parameter values for cancel
     @Ignore
     @Test

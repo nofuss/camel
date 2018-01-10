@@ -30,10 +30,6 @@ import org.junit.Test;
 public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintreeTestSupport {
     private static final String PATH_PREFIX = BraintreeApiCollection.getCollection().getApiName(WebhookNotificationGatewayApiMethod.class).getName();
 
-    public WebhookNotificationGatewayIntegrationTest() {
-        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
-    }
-
     @Test
     public void testParse() throws Exception {
         final BraintreeGateway gateway = getGateway();

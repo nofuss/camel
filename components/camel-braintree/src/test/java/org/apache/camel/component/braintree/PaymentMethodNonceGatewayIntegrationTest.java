@@ -29,10 +29,6 @@ public class PaymentMethodNonceGatewayIntegrationTest extends AbstractBraintreeT
     private static final Logger LOG = LoggerFactory.getLogger(PaymentMethodNonceGatewayIntegrationTest.class);
     private static final String PATH_PREFIX = BraintreeApiCollection.getCollection().getApiName(PaymentMethodNonceGatewayApiMethod.class).getName();
 
-    public PaymentMethodNonceGatewayIntegrationTest() {
-        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
-    }
-
     // TODO provide parameter values for create
     @Ignore
     @Test

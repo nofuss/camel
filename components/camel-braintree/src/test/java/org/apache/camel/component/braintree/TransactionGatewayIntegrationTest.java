@@ -48,7 +48,6 @@ public class TransactionGatewayIntegrationTest extends AbstractBraintreeTestSupp
     // *************************************************************************
 
     public TransactionGatewayIntegrationTest() {
-        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
         this.gateway = null;
         this.transactionIds = new LinkedList<>();
     }

@@ -46,7 +46,6 @@ public class PaymentMethodGatewayIntegrationTest extends AbstractBraintreeTestSu
     // *************************************************************************
 
     public PaymentMethodGatewayIntegrationTest() {
-        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
         this.customer = null;
         this.gateway = null;
         this.paymentMethodsTokens = new LinkedList<>();

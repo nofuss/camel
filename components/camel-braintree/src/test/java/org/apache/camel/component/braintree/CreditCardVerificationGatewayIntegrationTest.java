@@ -31,10 +31,6 @@ public class CreditCardVerificationGatewayIntegrationTest extends AbstractBraint
     private static final Logger LOG = LoggerFactory.getLogger(CreditCardVerificationGatewayIntegrationTest.class);
     private static final String PATH_PREFIX = BraintreeApiCollection.getCollection().getApiName(CreditCardVerificationGatewayApiMethod.class).getName();
 
-    public CreditCardVerificationGatewayIntegrationTest() {
-        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
-    }
-
     // TODO provide parameter values for find
     @Ignore
     @Test

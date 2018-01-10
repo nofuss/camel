@@ -32,10 +32,6 @@ public class DiscountGatewayIntegrationTest extends AbstractBraintreeTestSupport
     private static final Logger LOG = LoggerFactory.getLogger(DiscountGatewayIntegrationTest.class);
     private static final String PATH_PREFIX = BraintreeApiCollection.getCollection().getApiName(DiscountGatewayApiMethod.class).getName();
 
-    public DiscountGatewayIntegrationTest() {
-        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
-    }
-
     @Ignore
     @Test
     public void testAll() throws Exception {

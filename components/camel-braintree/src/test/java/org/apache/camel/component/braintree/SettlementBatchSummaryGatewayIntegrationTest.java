@@ -32,10 +32,6 @@ public class SettlementBatchSummaryGatewayIntegrationTest extends AbstractBraint
     private static final Logger LOG = LoggerFactory.getLogger(SettlementBatchSummaryGatewayIntegrationTest.class);
     private static final String PATH_PREFIX = BraintreeApiCollection.getCollection().getApiName(SettlementBatchSummaryGatewayApiMethod.class).getName();
 
-    public SettlementBatchSummaryGatewayIntegrationTest() {
-        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
-    }
-
     // TODO provide parameter values for generate
     @Ignore
     @Test

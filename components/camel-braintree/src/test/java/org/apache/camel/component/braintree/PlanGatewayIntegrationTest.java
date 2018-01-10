@@ -31,10 +31,6 @@ public class PlanGatewayIntegrationTest extends AbstractBraintreeTestSupport {
     private static final Logger LOG = LoggerFactory.getLogger(PlanGatewayIntegrationTest.class);
     private static final String PATH_PREFIX = getApiNameAsString(PlanGatewayApiMethod.class);
 
-    public PlanGatewayIntegrationTest() {
-        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
-    }
-
     @Ignore
     @Test
     public void testAll() throws Exception {

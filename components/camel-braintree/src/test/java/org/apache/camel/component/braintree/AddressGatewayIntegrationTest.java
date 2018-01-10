@@ -48,7 +48,6 @@ public class AddressGatewayIntegrationTest extends AbstractBraintreeTestSupport 
     // *************************************************************************
 
     public AddressGatewayIntegrationTest() {
-        super(new BraintreeConfigurationBuilderPublicPrivateKeys());
         this.customer = null;
         this.gateway = null;
         this.addressIds = new LinkedList<>();

@@ -38,16 +38,13 @@ import org.junit.Test;
 public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintreeTestSupport {
     private static final String PATH_PREFIX = BraintreeApiCollection.getCollection().getApiName(WebhookNotificationGatewayApiMethod.class).getName();
 
-    @BeforeClass
-    public static void onceExecutedBeforeAll() {
-        System.out.println("@BeforeClass: onceExecutedBeforeAll");
+    @Before
+    public void checkConfigurationProfile() {
+        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
     }
-
-
 
     @Test
     public void testParseSubscription() throws Exception {
-        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
         runParseSubscriptionTest(WebhookNotification.Kind.SUBSCRIPTION_CANCELED);
         runParseSubscriptionTest(WebhookNotification.Kind.SUBSCRIPTION_CHARGED_SUCCESSFULLY);
         runParseSubscriptionTest(WebhookNotification.Kind.SUBSCRIPTION_CHARGED_UNSUCCESSFULLY);
@@ -65,7 +62,6 @@ public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintree
 
     @Test
     public void testParseMerchantAccount() throws Exception {
-        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
         runParseMerchantAccountTest(WebhookNotification.Kind.SUB_MERCHANT_ACCOUNT_APPROVED);
         runParseMerchantAccountTest(WebhookNotification.Kind.SUB_MERCHANT_ACCOUNT_DECLINED);
     }
@@ -79,7 +75,6 @@ public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintree
 
     @Test
     public void testParseTransaction() throws Exception {
-        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
         runParseTransactionTest(WebhookNotification.Kind.TRANSACTION_DISBURSED);
         runParseTransactionTest(WebhookNotification.Kind.TRANSACTION_SETTLED);
         runParseTransactionTest(WebhookNotification.Kind.TRANSACTION_SETTLEMENT_DECLINED);
@@ -94,7 +89,6 @@ public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintree
 
     @Test
     public void testParseDisbursement() throws Exception {
-        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
         runParseDisbursementTest(WebhookNotification.Kind.DISBURSEMENT);
         runParseDisbursementTest(WebhookNotification.Kind.DISBURSEMENT_EXCEPTION);
     }
@@ -108,7 +102,6 @@ public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintree
 
     @Test
     public void testParseDispute() throws Exception {
-        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
         runParseDisputeTest(WebhookNotification.Kind.DISPUTE_OPENED);
         runParseDisputeTest(WebhookNotification.Kind.DISPUTE_LOST);
         runParseDisputeTest(WebhookNotification.Kind.DISPUTE_WON);
@@ -123,7 +116,6 @@ public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintree
 
     @Test
     public void testParsePartnerMerchant() throws Exception {
-        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
         runParsePartnerMerchantTest(WebhookNotification.Kind.PARTNER_MERCHANT_CONNECTED);
         runParsePartnerMerchantTest(WebhookNotification.Kind.PARTNER_MERCHANT_DISCONNECTED);
         runParsePartnerMerchantTest(WebhookNotification.Kind.PARTNER_MERCHANT_DECLINED);
@@ -170,7 +162,6 @@ public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintree
 
     @Test
     public void testParseAccountUpdater() throws Exception {
-        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
         runParsePAccountUpdaterTest(WebhookNotification.Kind.ACCOUNT_UPDATER_DAILY_REPORT);
     }
 
@@ -185,7 +176,6 @@ public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintree
 
     @Test
     public void testParseIdealPayment() throws Exception {
-        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
         runParseIdealPaymentTest(WebhookNotification.Kind.IDEAL_PAYMENT_COMPLETE);
         runParseIdealPaymentTest(WebhookNotification.Kind.IDEAL_PAYMENT_FAILED);
     }
@@ -199,7 +189,6 @@ public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintree
 
     @Test
     public void testParsePaymentInstrument() throws Exception {
-        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
         runParsePaymentInstrumentTest(WebhookNotification.Kind.GRANTED_PAYMENT_INSTRUMENT_UPDATE);
     }
 

@@ -128,21 +128,16 @@ public class AbstractBraintreeTestSupport extends CamelTestSupport {
         return configurationProfile;
     }
 
-    protected boolean checkConfigurationProfile(ConfigurationProfile... configurationProfiles) {
-        for (ConfigurationProfile configurationProfile : configurationProfiles) {
-            if (getConfigurationProfile().equals(configurationProfile)) {
-                return true;
-            }
-        }
-        return false;
+    protected boolean checkConfigurationProfile(ConfigurationProfile configurationProfile) {
+        return getConfigurationProfile().equals(configurationProfile);
     }
 
     private ConfigurationProfile parseConfigurationProfile() {
-        String configurationTypeString = System.getProperty("braintreeGatewayConfigurationType");
-        if (configurationTypeString != null) {
-            ConfigurationProfile configurationType = ConfigurationProfile.valueOf(configurationTypeString);
-            if (configurationType != null) {
-                return configurationType;
+        String configurationProfileString = System.getProperty("braintreeGatewayConfigurationProfile");
+        if (configurationProfileString != null) {
+            ConfigurationProfile configurationProfile = ConfigurationProfile.valueOf(configurationProfileString);
+            if (configurationProfile != null) {
+                return configurationProfile;
             }
         }
         return ConfigurationProfile.PUBLIC_PRIVATE_KEYS;

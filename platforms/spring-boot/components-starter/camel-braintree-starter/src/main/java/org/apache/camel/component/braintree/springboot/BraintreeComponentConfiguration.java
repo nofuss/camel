@@ -90,7 +90,9 @@ public class BraintreeComponentConfiguration
          */
         private String privateKey;
         /**
-         * The access token granted to a merchant.
+         * The access token granted by a merchant to another in order to process
+         * transactions on their behalf. Used in place of environment, merchant
+         * id, public key and private key fields.
          */
         private String accessToken;
         /**

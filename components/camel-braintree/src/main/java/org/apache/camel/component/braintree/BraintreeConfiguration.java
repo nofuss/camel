@@ -60,6 +60,7 @@ public class BraintreeConfiguration {
     private String privateKey;
 
     @UriParam
+    @Metadata(label = "advanced")
     private String accessToken;
 
     @UriParam
@@ -152,7 +153,8 @@ public class BraintreeConfiguration {
     }
 
     /**
-     * The access token granted to a merchant.
+     * The access token granted by a merchant to another in order to process transactions on their behalf.
+     * Used in place of environment, merchant id, public key and private key fields.
      */
     public void setAccessToken(String accessToken) {
         this.accessToken = accessToken;

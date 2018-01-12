@@ -69,7 +69,7 @@
     <asterisk-java-version>1.0.0-final</asterisk-java-version>
     <asterisk-java-bundle-version>1.0.0-final_1</asterisk-java-bundle-version>
     <atmos-client-version>2.2.2</atmos-client-version>
-    <atmosphere-version>2.4.16</atmosphere-version>
+    <atmosphere-version>2.4.18</atmosphere-version>
     <atmosphere-version-range>[2.4,3.0)</atmosphere-version-range>
     <atomix-version>1.0.8</atomix-version>
     <atomix-catalyst-version>1.2.1</atomix-catalyst-version>
@@ -96,7 +96,7 @@
     <boon-version>0.34</boon-version>
     <bouncycastle-version>1.57</bouncycastle-version>
     <boxjavalibv2.version>3.2.1</boxjavalibv2.version>
-    <box-java-sdk-version>2.8.2</box-java-sdk-version>
+    <box-java-sdk-version>2.9.0</box-java-sdk-version>
     <braintree-gateway-version>2.74.0</braintree-gateway-version>
     <brave-zipkin-version>4.13.2</brave-zipkin-version>
     <build-helper-maven-plugin-version>1.10</build-helper-maven-plugin-version>
@@ -123,10 +123,10 @@
     <chronicle-core-version>1.9.24</chronicle-core-version>
     <chronicle-engine-version>1.13.27</chronicle-engine-version>
     <chronicle-map-version>2.4.17</chronicle-map-version>
-    <chronicle-network-version>1.9.19</chronicle-network-version>
-    <chronicle-queue-version>4.6.61</chronicle-queue-version>
-    <chronicle-threads-version>1.9.4</chronicle-threads-version>
-    <chronicle-wire-version>1.10.6</chronicle-wire-version>
+    <chronicle-network-version>1.9.20</chronicle-network-version>
+    <chronicle-queue-version>4.6.63</chronicle-queue-version>
+    <chronicle-threads-version>1.9.5</chronicle-threads-version>
+    <chronicle-wire-version>1.10.7</chronicle-wire-version>
     <chunk-templates-version>3.3.1</chunk-templates-version>
     <chunk-templates-bundle-version>3.3.1_1</chunk-templates-bundle-version>
     <classmate-version>1.3.4</classmate-version>
@@ -147,7 +147,7 @@
     <commons-cli-version>1.4</commons-cli-version>
     <commons-daemon-version>1.0.15</commons-daemon-version>
     <commons-dbcp-version>1.4</commons-dbcp-version>
-    <commons-dbcp2-version>2.1.1</commons-dbcp2-version>
+    <commons-dbcp2-version>2.2.0</commons-dbcp2-version>
     <commons-digester-1x-version>1.8.1</commons-digester-1x-version>
     <commons-digester-version>2.1</commons-digester-version>
     <commons-exec-version>1.3</commons-exec-version>
@@ -442,7 +442,7 @@
     <karaf4-version>4.1.4</karaf4-version>
     <kie-version>7.3.0.Final</kie-version>
     <krati-version>0.4.9</krati-version>
-    <kubernetes-client-version>3.1.7</kubernetes-client-version>
+    <kubernetes-client-version>3.1.8</kubernetes-client-version>
     <kubernetes-model-version>2.0.4</kubernetes-model-version>
     <kxml2-bundle-version>2.3.0_3</kxml2-bundle-version>
     <leveldbjni-version>1.8</leveldbjni-version>
@@ -489,7 +489,7 @@
     <maven-resources-plugin-version>3.0.2</maven-resources-plugin-version>
     <maven-reporting-api-version>2.2.1</maven-reporting-api-version>
     <maven-reporting-impl-version>2.0.5</maven-reporting-impl-version>
-    <maven-scr-plugin-version>1.22.0</maven-scr-plugin-version>
+    <maven-scr-plugin-version>1.25.0</maven-scr-plugin-version>
     <maven-shade-plugin-version>3.0.0</maven-shade-plugin-version>
     <maven-surefire-report-plugin-version>2.13</maven-surefire-report-plugin-version>
     <maven-war-plugin-version>3.0.0</maven-war-plugin-version>
@@ -565,7 +565,7 @@
     <protobuf-javanano-version>3.1.0</protobuf-javanano-version>
     <protobuf-maven-plugin-version>0.5.0</protobuf-maven-plugin-version>
     <protonpack-version>1.8</protonpack-version>
-    <pubnub-version>4.17.0</pubnub-version>
+    <pubnub-version>4.18.0</pubnub-version>
     <qpid-bundle-version>0.28_1</qpid-bundle-version>
     <qpid-proton-j-version>0.24.0</qpid-proton-j-version>
     <qpid-jms-client-version>0.28.0</qpid-jms-client-version>
@@ -1573,6 +1573,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-linkedin</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-lra</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
@@ -3007,6 +3012,11 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-linkedin-starter</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-lra-starter</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>

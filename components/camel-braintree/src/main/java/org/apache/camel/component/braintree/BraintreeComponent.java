@@ -68,7 +68,6 @@ public class BraintreeComponent extends AbstractApiComponent<BraintreeApiName, B
     }
 
     public synchronized BraintreeGateway getGateway(BraintreeConfiguration configuration) {
-        // TODO - review keying and whether or not the accessToken should be more secret
         BraintreeGateway gateway;
         if (configuration.getAccessToken() != null) {
             gateway = gateways.get(configuration.getAccessToken());

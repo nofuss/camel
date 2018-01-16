@@ -17,8 +17,6 @@
 package org.apache.camel.component.braintree;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,15 +30,14 @@ import org.apache.camel.component.braintree.internal.BraintreeConstants;
 import org.apache.camel.component.braintree.internal.WebhookNotificationGatewayApiMethod;
 import org.junit.Assume;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 public class WebhookNotificationGatewayIntegrationTest extends AbstractBraintreeTestSupport {
     private static final String PATH_PREFIX = BraintreeApiCollection.getCollection().getApiName(WebhookNotificationGatewayApiMethod.class).getName();
 
     @Before
-    public void checkConfigurationProfile() {
-        Assume.assumeTrue(checkConfigurationProfile(ConfigurationProfile.PUBLIC_PRIVATE_KEYS));
+    public void checkAuthenticationType() {
+        Assume.assumeTrue(checkAuthenticationType(AuthenticationType.PUBLIC_PRIVATE_KEYS));
     }
 
     @Test

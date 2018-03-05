@@ -103,12 +103,25 @@
   </issueManagement>
 
   <distributionManagement>
+    <repository>
+      <id>mcom-releases</id>
+      <name>MCOM Release Repository</name>
+      <url>https://archiva.bcn.magento.com/repository/internal</url>
+    </repository>
+    <snapshotRepository>
+      <id>mcom-snapshots</id>
+      <name>MCOM Snapshot Repository</name>
+      <url>https://archiva.bcn.magento.com/repository/snapshots</url>
+    </snapshotRepository>
+  </distributionManagement>
+<!--
+  <distributionManagement>
     <site>
       <id>apache.website</id>
       <url>${site-repo-url}</url>
     </site>
   </distributionManagement>
-
+-->
   <!-- Comment out the snapshot repositories as we don't need them now -->
   <repositories>
     <repository>
